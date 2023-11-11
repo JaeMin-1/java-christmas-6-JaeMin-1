@@ -33,11 +33,12 @@ public class Application {
         beverage.put("샴페인", 25000);
         allMenu.put("음료", beverage);
 
+        int day = 0;
         while (true) {
             try {
                 System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
                 String input = Console.readLine();
-                int day = Integer.parseInt(input);
+                day = Integer.parseInt(input);
                 if (day < 1 || day > 31) {
                     throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
                 }
@@ -97,6 +98,14 @@ public class Application {
             System.out.println("삼페인 1개");
         }
 
-
+        int dDayDiscount = 0;
+        int weekdayDiscount = 0;
+        int weekendDiscount = 0;
+        int specialDiscount = 0;
+        int giveawayEvent = 0;
+        if (day <= 25) {
+            dDayDiscount = 1000 + 100 * (day - 1);
+        }
+        
     }
 }
