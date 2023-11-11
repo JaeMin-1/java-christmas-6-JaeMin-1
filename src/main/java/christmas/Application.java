@@ -90,8 +90,13 @@ public class Application {
 
         System.out.println("<할인 전 총주문 금액>");
         int totalOrderAmount = 0;
-        for (Map.Entry<String, Integer> orderMenu : order.entrySet()) {
-            totalOrderAmount += orderMenu.getValue();
+        for (Map.Entry<String, Map<String, Integer>> category : allMenu.entrySet()) {
+            Map<String, Integer> menuInCategory = category.getValue();
+            for (String orderMenu : order.keySet()) {
+                if (menuInCategory.containsKey(orderMenu)) {
+                    totalOrderAmount += order.get(orderMenu) * menuInCategory.get(orderMenu);
+                }
+            }
         }
         System.out.println(String.format("%,d", totalOrderAmount));
         System.out.println();
@@ -151,14 +156,12 @@ public class Application {
         System.out.println();
 
         System.out.println("<12월 이벤트 배지>");
-        if (totalBenefits >= 5000) {
-            System.out.println("별");
-        }
-        if (totalBenefits >= 10000) {
-            System.out.println("트리");
-        }
         if (totalBenefits >= 20000) {
             System.out.println("산타");
+        } else if (totalBenefits >= 10000) {
+            System.out.println("트리");
+        } else if (totalBenefits >= 5000) {
+            System.out.println("별");
         }
     }
 }
