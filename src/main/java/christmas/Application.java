@@ -80,11 +80,13 @@ public class Application {
                 System.out.println(e.getMessage());
             }
         }
-
+        System.out.println("12월 " + day + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
+        System.out.println();
         System.out.println("<주문 메뉴>");
         for (Map.Entry<String, Integer> orderMenu : order.entrySet()) {
             System.out.println(orderMenu.getKey() + " " + orderMenu.getValue() + "개");
         }
+        System.out.println();
 
         System.out.println("<할인 전 총주문 금액>");
         int totalOrderAmount = 0;
@@ -92,11 +94,13 @@ public class Application {
             totalOrderAmount += orderMenu.getValue();
         }
         System.out.println(String.format("%,d", totalOrderAmount));
+        System.out.println();
 
         System.out.println("<증정 메뉴>");
         if (totalOrderAmount >= 120000) {
             System.out.println("삼페인 1개");
         }
+        System.out.println();
 
         int dDayDiscount = 0;
         int weekdayDiscount = 0;
@@ -133,11 +137,28 @@ public class Application {
         System.out.println("주말 할인: -" + String.format("%,d", weekendDiscount));
         System.out.println("특별 할인: -" + String.format("%,d", specialDiscount));
         System.out.println("증정 이벤트: -" + String.format("%,d", giveawayEvent));
+        System.out.println();
 
         int totalBenefits = 0;
         totalBenefits = dDayDiscount + weekdayDiscount + weekendDiscount + specialDiscount + giveawayEvent;
         System.out.println("<총혜택 금액>");
         System.out.println("-" + String.format("%,d", totalBenefits));
+        System.out.println();
 
+        int expectedPaymentAmount = totalOrderAmount - totalBenefits + giveawayEvent;
+        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.println(expectedPaymentAmount);
+        System.out.println();
+
+        System.out.println("<12월 이벤트 배지>");
+        if (totalBenefits >= 5000) {
+            System.out.println("별");
+        }
+        if (totalBenefits >= 10000) {
+            System.out.println("트리");
+        }
+        if (totalBenefits >= 20000) {
+            System.out.println("산타");
+        }
     }
 }
