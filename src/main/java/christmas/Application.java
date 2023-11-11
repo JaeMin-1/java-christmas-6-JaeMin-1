@@ -113,6 +113,12 @@ public class Application {
                 }
             }
         }
-
+        if (day % 7 == 1 || day % 7 == 2) {
+            for (String menuName : order.keySet()) {
+                if (main.containsKey(menuName)) {
+                    weekendDiscount += 2023 * order.get(menuName);
+                }
+            }
+        }
     }
 }
