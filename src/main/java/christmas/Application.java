@@ -134,5 +134,10 @@ public class Application {
         System.out.println("특별 할인: -" + String.format("%,d", specialDiscount));
         System.out.println("증정 이벤트: -" + String.format("%,d", giveawayEvent));
 
+        int totalBenefits = 0;
+        totalBenefits = dDayDiscount + weekdayDiscount + weekendDiscount + specialDiscount + giveawayEvent;
+        System.out.println("<총혜택 금액>");
+        System.out.println("-" + String.format("%,d", totalBenefits));
+
     }
 }
