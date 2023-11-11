@@ -91,7 +91,7 @@ public class Application {
         for (Map.Entry<String, Integer> orderMenu : order.entrySet()) {
             totalOrderAmount += orderMenu.getValue();
         }
-        System.out.printf("%,d\n", totalOrderAmount);
+        System.out.println(String.format("%,d", totalOrderAmount));
 
         System.out.println("<증정 메뉴>");
         if (totalOrderAmount >= 120000) {
@@ -126,5 +126,13 @@ public class Application {
         if (totalOrderAmount >= 120000) {
             giveawayEvent += 25000;
         }
+
+        System.out.println("<혜택 내역>");
+        System.out.println("크리스마스 디데이 할인: -" + String.format("%,d", dDayDiscount));
+        System.out.println("평일 할인: -" + String.format("%,d", weekdayDiscount));
+        System.out.println("주말 할인: -" + String.format("%,d", weekendDiscount));
+        System.out.println("특별 할인: -" + String.format("%,d", specialDiscount));
+        System.out.println("증정 이벤트: -" + String.format("%,d", giveawayEvent));
+
     }
 }
