@@ -120,5 +120,8 @@ public class Application {
                 }
             }
         }
+        if (day % 7 == 3 || day == 25) {
+            specialDiscount += 1000;
+        }
     }
 }
