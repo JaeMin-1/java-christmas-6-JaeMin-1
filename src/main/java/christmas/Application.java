@@ -33,20 +33,7 @@ public class Application {
         beverage.put("샴페인", 25000);
         allMenu.put("음료", beverage);
 
-        int day = 0;
-        while (true) {
-            try {
-                System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
-                String input = Console.readLine();
-                day = Integer.parseInt(input);
-                if (day < 1 || day > 31) {
-                    throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
-                }
-                break;
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        int day = InputView.readDate();
 
         Map<String, Integer> order = new HashMap<>();
         while (true) {
@@ -98,7 +85,7 @@ public class Application {
                 }
             }
         }
-        System.out.println(String.format("%,d", totalOrderAmount));
+        System.out.println(String.format("%,d", totalOrderAmount) + "원");
         System.out.println();
 
         System.out.println("<증정 메뉴>");
@@ -137,22 +124,32 @@ public class Application {
         }
 
         System.out.println("<혜택 내역>");
-        System.out.println("크리스마스 디데이 할인: -" + String.format("%,d", dDayDiscount));
-        System.out.println("평일 할인: -" + String.format("%,d", weekdayDiscount));
-        System.out.println("주말 할인: -" + String.format("%,d", weekendDiscount));
-        System.out.println("특별 할인: -" + String.format("%,d", specialDiscount));
-        System.out.println("증정 이벤트: -" + String.format("%,d", giveawayEvent));
+        if (dDayDiscount != 0) {
+            System.out.println("크리스마스 디데이 할인: -" + String.format("%,d", dDayDiscount) + "원");
+        }
+        if (weekdayDiscount != 0) {
+            System.out.println("평일 할인: -" + String.format("%,d", weekdayDiscount) + "원");
+        }
+        if (weekendDiscount != 0) {
+            System.out.println("주말 할인: -" + String.format("%,d", weekendDiscount) + "원");
+        }
+        if (specialDiscount != 0) {
+            System.out.println("특별 할인: -" + String.format("%,d", specialDiscount) + "원");
+        }
+        if (giveawayEvent != 0) {
+            System.out.println("증정 이벤트: -" + String.format("%,d", giveawayEvent) + "원");
+        }
         System.out.println();
 
         int totalBenefits = 0;
         totalBenefits = dDayDiscount + weekdayDiscount + weekendDiscount + specialDiscount + giveawayEvent;
         System.out.println("<총혜택 금액>");
-        System.out.println("-" + String.format("%,d", totalBenefits));
+        System.out.println("-" + String.format("%,d", totalBenefits) + "원");
         System.out.println();
 
         int expectedPaymentAmount = totalOrderAmount - totalBenefits + giveawayEvent;
         System.out.println("<할인 후 예상 결제 금액>");
-        System.out.println(expectedPaymentAmount);
+        System.out.println(String.format("%,d", expectedPaymentAmount) + "원");
         System.out.println();
 
         System.out.println("<12월 이벤트 배지>");
