@@ -85,5 +85,11 @@ public class Application {
             System.out.println(orderMenu.getKey() + " " + orderMenu.getValue() + "개");
         }
 
+        int totalOrderAmount = 0;
+        for (Map.Entry<String, Integer> orderMenu : order.entrySet()) {
+            totalOrderAmount += orderMenu.getValue();
+        }
+
+
     }
 }
