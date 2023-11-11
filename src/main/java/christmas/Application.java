@@ -85,9 +85,16 @@ public class Application {
             System.out.println(orderMenu.getKey() + " " + orderMenu.getValue() + "개");
         }
 
+        System.out.println("<할인 전 총주문 금액>");
         int totalOrderAmount = 0;
         for (Map.Entry<String, Integer> orderMenu : order.entrySet()) {
             totalOrderAmount += orderMenu.getValue();
+        }
+        System.out.printf("%,d\n", totalOrderAmount);
+
+        System.out.println("<증정 메뉴>");
+        if (totalOrderAmount >= 120000) {
+            System.out.println("삼페인 1개");
         }
 
 
