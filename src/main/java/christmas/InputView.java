@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InputView {
-    private static AllMenu allMenu = new AllMenu();
-
     public static int readDate() {
         while (true) {
             try {
@@ -47,7 +45,14 @@ public class InputView {
             int count = InputValidation.validateNumber(tempNum);
             tempOrder.put(tempName, count);
         }
+        validateDuplication(input, tempOrder);
         Order order = new Order(tempOrder);
         return order.getOrder();
+    }
+
+    private static void validateDuplication(String[] input, Map<String, Integer> tempOrder) {
+        if (input.length != tempOrder.size()) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
     }
 }
