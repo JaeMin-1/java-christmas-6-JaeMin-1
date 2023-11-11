@@ -1,7 +1,5 @@
 package christmas;
 
-import camp.nextstep.edu.missionutils.Console;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Application {
@@ -9,39 +7,8 @@ public class Application {
         // TODO: 프로그램 구현
         AllMenu allMenu = new AllMenu();
         int day = InputView.readDate();
+        Map<String, Integer> order = InputView.readOrder();
 
-        Map<String, Integer> order = new HashMap<>();
-        while (true) {
-            try {
-                System.out.println("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
-                String input = Console.readLine();
-                String[] tempOrder = input.split(",");
-                for (String part : tempOrder) {
-                    String[] pair = part.split("-");
-                    String tempName = pair[0];
-                    boolean checkMenu = false;
-                    for (Map.Entry<String, Map<String, Integer>> category : allMenu.getAllMenu().entrySet()) {
-                        Map<String, Integer> menuInCategory = category.getValue();
-                        if (menuInCategory.containsKey(tempName)) {
-                            checkMenu = true;
-                        }
-                    }
-                    if (!checkMenu) {
-                        throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-                    }
-
-                    String tempNum = pair[1];
-                    int tempCount = Integer.parseInt(tempNum);
-                    if (tempCount < 1) {
-                        throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-                    }
-                    order.put(tempName, tempCount);
-                }
-                break;
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
         System.out.println("12월 " + day + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
         System.out.println();
         System.out.println("<주문 메뉴>");

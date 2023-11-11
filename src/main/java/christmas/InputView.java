@@ -19,20 +19,13 @@ public class InputView {
         }
     }
 
-    public static int readOrder() {
+    public static Map<String, Integer> readOrder() {
         while (true) {
             try {
                 System.out.println("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
-                Map<String, Integer> order = new HashMap<>();
                 String input = Console.readLine();
                 String[] tempOrder = input.split(",");
-                for (String part : tempOrder) {
-                    String[] pair = part.split("-");
-                    String tempName = pair[0];
-                    String tempNum = pair[1];
-                    int count = InputValidation.validateNumber(tempNum);
-                    order.put(tempName, count);
-                }
+                return validateAllOrder(tempOrder);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -43,5 +36,18 @@ public class InputView {
         int day = InputValidation.validateNumber(input);
         Date date = new Date(day);
         return date.getDate();
+    }
+
+    private static Map<String, Integer> validateAllOrder(String[] input) {
+        Map<String, Integer> tempOrder = new HashMap<>();
+        for (String part : input) {
+            String[] pair = part.split("-");
+            String tempName = pair[0];
+            String tempNum = pair[1];
+            int count = InputValidation.validateNumber(tempNum);
+            tempOrder.put(tempName, count);
+        }
+        Order order = new Order(tempOrder);
+        return order.getOrder();
     }
 }

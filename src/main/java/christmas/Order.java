@@ -39,4 +39,8 @@ public class Order {
         }
         return checkMenu;
     }
+
+    public Map<String, Integer> getOrder() {
+        return order;
+    }
 }
