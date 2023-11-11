@@ -106,6 +106,13 @@ public class Application {
         if (day <= 25) {
             dDayDiscount = 1000 + 100 * (day - 1);
         }
-        
+        if (day % 7 != 1 && day % 7 != 2) {
+            for (String menuName : order.keySet()) {
+                if (dessert.containsKey(menuName)) {
+                    weekdayDiscount += 2023 * order.get(menuName);
+                }
+            }
+        }
+
     }
 }
