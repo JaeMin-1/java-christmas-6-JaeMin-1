@@ -80,6 +80,10 @@ public class Application {
             }
         }
 
+        System.out.println("<주문 메뉴>");
+        for (Map.Entry<String, Integer> orderMenu : order.entrySet()) {
+            System.out.println(orderMenu.getKey() + " " + orderMenu.getValue() + "개");
+        }
 
     }
 }
