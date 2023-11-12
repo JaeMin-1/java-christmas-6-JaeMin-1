@@ -27,7 +27,8 @@ public class ChristmasController {
     private int calculateTotalOrderAmount(Map<String, Integer> order) {
         AllMenu allMenu = new AllMenu();
         int totalOrderAmount = 0;
-        for (Map.Entry<String, Map<String, Integer>> category : allMenu.getAllMenu().entrySet()) {
+        Map<String, Map<String, Integer>> allMenuMap = allMenu.getAllMenu();
+        for (Map.Entry<String, Map<String, Integer>> category : allMenuMap.entrySet()) {
             totalOrderAmount += calculateCategoryTotal(category.getValue(), order);
         }
         return totalOrderAmount;

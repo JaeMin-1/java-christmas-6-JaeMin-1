@@ -4,7 +4,7 @@ import christmas.constants.ErrorMessage;
 import java.util.Map;
 
 public class Order {
-    private Map<String, Integer> order;
+    private final Map<String, Integer> order;
 
     public Order(Map<String, Integer> order) {
         validateMenu(order);
@@ -31,8 +31,9 @@ public class Order {
 
     private boolean containMenu(String tempName) {
         AllMenu allMenu = new AllMenu();
+        Map<String, Map<String, Integer>> allMenuMap = allMenu.getAllMenu();
         boolean duplicateMenu = false;
-        for (Map.Entry<String, Map<String, Integer>> category : allMenu.getAllMenu().entrySet()) {
+        for (Map.Entry<String, Map<String, Integer>> category : allMenuMap.entrySet()) {
             Map<String, Integer> menuInCategory = category.getValue();
             if (menuInCategory.containsKey(tempName)) {
                 duplicateMenu = true;
