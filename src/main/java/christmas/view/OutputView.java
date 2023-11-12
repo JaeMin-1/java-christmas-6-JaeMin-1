@@ -60,6 +60,19 @@ public class OutputView {
         System.out.println();
     }
 
+    public static void printDecemberEventBadge(int totalBenefits) {
+        System.out.println("<12월 이벤트 배지>");
+        if (totalBenefits >= 20000) {
+            System.out.println("산타");
+        } else if (totalBenefits >= 10000) {
+            System.out.println("트리");
+        } else if (totalBenefits >= 5000) {
+            System.out.println("별");
+        } else if (totalBenefits < 5000) {
+            System.out.println("없음");
+        }
+    }
+
     private static void printNothing(int dDayDiscount, int weekdayDiscount, int weekendDiscount,
                                      int specialDiscount, int giveawayEvent) {
         if (dDayDiscount == 0 && weekdayDiscount == 0 && weekendDiscount == 0 && specialDiscount == 0
