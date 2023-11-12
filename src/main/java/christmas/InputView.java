@@ -8,8 +8,7 @@ public class InputView {
     public static int readDate() {
         while (true) {
             try {
-                System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
-                String input = Console.readLine();
+                String input = inputDate();
                 return validateAllDate(input);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -28,6 +27,11 @@ public class InputView {
         }
     }
 
+    private static String inputDate() {
+        System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
+        return Console.readLine();
+    }
+
     private static int validateAllDate(String input) {
         int day = InputValidation.validateDate(input);
         Date date = new Date(day);
@@ -43,13 +47,13 @@ public class InputView {
 
     private static Map<String, Integer> validateAllOrder(String[] input) {
         Map<String, Integer> tempOrder = new HashMap<>();
-        processInput(input, tempOrder);
+        processInputOrder(input, tempOrder);
         validateDuplication(input, tempOrder);
         Order order = new Order(tempOrder);
         return order.getOrder();
     }
 
-    private static void processInput(String[] input, Map<String, Integer> tempOrder) {
+    private static void processInputOrder(String[] input, Map<String, Integer> tempOrder) {
         for (String part : input) {
             String[] pair = part.split("-");
             String tempName = pair[0];
