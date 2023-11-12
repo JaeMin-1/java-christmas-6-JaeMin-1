@@ -12,24 +12,16 @@ public class ChristmasController {
     private int weekendDiscount;
     private int specialDiscount;
     private int giveawayEvent;
+    private int totalBenefits;
 
     public void startOrder() {
         int day = InputView.readDate();
         Map<String, Integer> order = InputView.readOrder();
-
         OutputView.printOrderMenu(day, order);
         int totalOrderAmount = calculateTotalOrderAmount(order);
-        OutputView.printTotalOrderAmount(totalOrderAmount);
-        OutputView.printGiveaway(totalOrderAmount);
-        calculateBenefits(day, order, totalOrderAmount);
 
-        OutputView.printBenefitDetails(dDayDiscount, weekdayDiscount, weekendDiscount,
-                specialDiscount, giveawayEvent);
-        int totalBenefits = dDayDiscount + weekdayDiscount + weekendDiscount + specialDiscount + giveawayEvent;
-        OutputView.printTotalBenefits(totalBenefits);
-        int expectedPaymentAmount = totalOrderAmount - totalBenefits + giveawayEvent;
-        OutputView.printExpectedPaymentAmount(expectedPaymentAmount);
-        OutputView.printDecemberEventBadge(totalBenefits);
+        showBenefits(day, order, totalOrderAmount);
+        showFinalResult(totalOrderAmount);
     }
 
     private int calculateTotalOrderAmount(Map<String, Integer> order) {
@@ -51,11 +43,28 @@ public class ChristmasController {
         return categoryTotal;
     }
 
+    private void showBenefits(int day, Map<String, Integer> order, int totalOrderAmount) {
+        OutputView.printTotalOrderAmount(totalOrderAmount);
+        OutputView.printGiveaway(totalOrderAmount);
+        calculateBenefits(day, order, totalOrderAmount);
+
+        OutputView.printBenefitDetails(dDayDiscount, weekdayDiscount, weekendDiscount,
+                specialDiscount, giveawayEvent);
+        totalBenefits = dDayDiscount + weekdayDiscount + weekendDiscount + specialDiscount + giveawayEvent;
+        OutputView.printTotalBenefits(totalBenefits);
+    }
+
     private void calculateBenefits(int day, Map<String, Integer> order, int totalOrderAmount) {
         dDayDiscount = Calculation.calculateDDayDiscount(day);
         weekdayDiscount = Calculation.calculateWeekdayDiscount(order, day);
         weekendDiscount = Calculation.calculateWeekendDiscount(order, day);
         specialDiscount = Calculation.calculateSpecialDiscount(day);
         giveawayEvent = Calculation.calculateGiveawayEvent(totalOrderAmount);
+    }
+
+    private void showFinalResult(int totalOrderAmount) {
+        int expectedPaymentAmount = totalOrderAmount - totalBenefits + giveawayEvent;
+        OutputView.printExpectedPaymentAmount(expectedPaymentAmount);
+        OutputView.printDecemberEventBadge(totalBenefits);
     }
 }
