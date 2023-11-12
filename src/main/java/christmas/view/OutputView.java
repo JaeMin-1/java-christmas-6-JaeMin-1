@@ -54,6 +54,11 @@ public class OutputView {
         System.out.println();
     }
 
+    public static void printExpectedPaymentAmount(int expectedPaymentAmount) {
+        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.println(String.format("%,d", expectedPaymentAmount) + "원");
+        System.out.println();
+    }
 
     private static void printNothing(int dDayDiscount, int weekdayDiscount, int weekendDiscount,
                                      int specialDiscount, int giveawayEvent) {
