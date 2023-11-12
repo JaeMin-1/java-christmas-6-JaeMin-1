@@ -11,6 +11,8 @@ public class Controller {
 
         OutputView.printOrderMenu(day, order);
         int totalOrderAmount = calculateTotalOrderAmount(order);
+        OutputView.printTotalOrderAmount(totalOrderAmount);
+
     }
 
     private int calculateTotalOrderAmount(Map<String, Integer> order) {
