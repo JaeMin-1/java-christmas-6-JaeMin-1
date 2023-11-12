@@ -10,6 +10,7 @@ public class Order {
         validateMenu(order);
         validateOrderCount(order);
         validateMaxOrderCount(order);
+        validateOnlyBeverage(order);
         this.order = order;
     }
 
@@ -40,17 +41,36 @@ public class Order {
         }
     }
 
+    private void validateOnlyBeverage(Map<String, Integer> order) {
+        AllMenu allMenu = new AllMenu();
+        Map<String, Map<String, Integer>> allMenuMap = allMenu.getAllMenu();
+        Map<String, Integer> allBeverage = allMenuMap.get("음료");
+
+        if (!containsNonBeverages(order, allBeverage)) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_ORDER.getMessage());
+        }
+    }
+
     private boolean containMenu(String tempName) {
         AllMenu allMenu = new AllMenu();
         Map<String, Map<String, Integer>> allMenuMap = allMenu.getAllMenu();
-        boolean duplicateMenu = false;
+        boolean validMenu = false;
         for (Map.Entry<String, Map<String, Integer>> category : allMenuMap.entrySet()) {
             Map<String, Integer> menuInCategory = category.getValue();
             if (menuInCategory.containsKey(tempName)) {
-                duplicateMenu = true;
+                validMenu = true;
             }
         }
-        return duplicateMenu;
+        return validMenu;
+    }
+
+    private boolean containsNonBeverages(Map<String, Integer> order, Map<String, Integer> allBeverage) {
+        for (String menuName : order.keySet()) {
+            if (!allBeverage.containsKey(menuName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Map<String, Integer> getOrder() {
