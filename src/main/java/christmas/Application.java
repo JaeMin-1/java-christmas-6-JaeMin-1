@@ -10,13 +10,7 @@ public class Application {
         int day = InputView.readDate();
         Map<String, Integer> order = InputView.readOrder();
 
-        System.out.println("12월 " + day + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
-        System.out.println();
-        System.out.println("<주문 메뉴>");
-        for (Map.Entry<String, Integer> orderMenu : order.entrySet()) {
-            System.out.println(orderMenu.getKey() + " " + orderMenu.getValue() + "개");
-        }
-        System.out.println();
+        OutputView.printOrderMenu(day, order);
 
         System.out.println("<할인 전 총주문 금액>");
         int totalOrderAmount = 0;

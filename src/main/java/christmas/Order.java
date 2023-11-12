@@ -30,14 +30,14 @@ public class Order {
 
     private boolean containMenu(String tempName) {
         AllMenu allMenu = new AllMenu();
-        boolean checkMenu = false;
+        boolean duplicateMenu = false;
         for (Map.Entry<String, Map<String, Integer>> category : allMenu.getAllMenu().entrySet()) {
             Map<String, Integer> menuInCategory = category.getValue();
             if (menuInCategory.containsKey(tempName)) {
-                checkMenu = true;
+                duplicateMenu = true;
             }
         }
-        return checkMenu;
+        return duplicateMenu;
     }
 
     public Map<String, Integer> getOrder() {
