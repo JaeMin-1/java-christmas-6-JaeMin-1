@@ -12,7 +12,6 @@ public class Application {
 
         OutputView.printOrderMenu(day, order);
 
-        System.out.println("<할인 전 총주문 금액>");
         int totalOrderAmount = 0;
         for (Map.Entry<String, Map<String, Integer>> category : allMenu.getAllMenu().entrySet()) {
             Map<String, Integer> menuInCategory = category.getValue();
@@ -22,6 +21,7 @@ public class Application {
                 }
             }
         }
+        System.out.println("<할인 전 총주문 금액>");
         System.out.println(String.format("%,d", totalOrderAmount) + "원");
         System.out.println();
 
@@ -112,4 +112,6 @@ public class Application {
             System.out.println("없음");
         }
     }
+
+
 }
