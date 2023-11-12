@@ -1,5 +1,6 @@
 package christmas.model;
 
+import christmas.constants.ErrorMessage;
 import java.util.Map;
 
 public class Order {
@@ -23,7 +24,7 @@ public class Order {
     private void validateOrderCount(Map<String, Integer> order) {
         for (String menuName : order.keySet()) {
             if (order.get(menuName) < 1) {
-                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                throw new IllegalArgumentException(ErrorMessage.INVALID_ORDER.getMessage());
             }
         }
     }
