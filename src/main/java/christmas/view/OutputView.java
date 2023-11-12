@@ -43,6 +43,18 @@ public class OutputView {
         System.out.println();
     }
 
+    public static void printTotalBenefits(int totalBenefits) {
+        System.out.println("<총혜택 금액>");
+        if (totalBenefits == 0) {
+            System.out.println("0원");
+        }
+        if (totalBenefits != 0) {
+            System.out.println("-" + String.format("%,d", totalBenefits) + "원");
+        }
+        System.out.println();
+    }
+
+
     private static void printNothing(int dDayDiscount, int weekdayDiscount, int weekendDiscount,
                                      int specialDiscount, int giveawayEvent) {
         if (dDayDiscount == 0 && weekdayDiscount == 0 && weekendDiscount == 0 && specialDiscount == 0

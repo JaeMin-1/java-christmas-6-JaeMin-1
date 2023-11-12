@@ -48,33 +48,11 @@ public class ChristmasController {
 
         OutputView.printBenefitDetails(dDayDiscount, weekdayDiscount, weekendDiscount,
                 specialDiscount, giveawayEvent);
-
-        int totalBenefits = 0;
-        totalBenefits = dDayDiscount + weekdayDiscount + weekendDiscount + specialDiscount + giveawayEvent;
-        System.out.println("<총혜택 금액>");
-        if (totalBenefits == 0) {
-            System.out.println("0원");
-        }
-        if (totalBenefits != 0) {
-            System.out.println("-" + String.format("%,d", totalBenefits) + "원");
-        }
-        System.out.println();
-
+        int totalBenefits = dDayDiscount + weekdayDiscount + weekendDiscount + specialDiscount + giveawayEvent;
+        OutputView.printTotalBenefits(totalBenefits);
         int expectedPaymentAmount = totalOrderAmount - totalBenefits + giveawayEvent;
-        System.out.println("<할인 후 예상 결제 금액>");
-        System.out.println(String.format("%,d", expectedPaymentAmount) + "원");
-        System.out.println();
-
-        System.out.println("<12월 이벤트 배지>");
-        if (totalBenefits >= 20000) {
-            System.out.println("산타");
-        } else if (totalBenefits >= 10000) {
-            System.out.println("트리");
-        } else if (totalBenefits >= 5000) {
-            System.out.println("별");
-        } else if (totalBenefits < 5000) {
-            System.out.println("없음");
-        }
+        OutputView.printExpectedPaymentAmount(expectedPaymentAmount);
+        OutputView.printDecemberEventBadge(totalBenefits);
 
     }
 
