@@ -9,11 +9,13 @@ public enum OutputMessage {
     EXPECTED_PAYMENT_AMOUNT("<할인 후 예상 결제 금액>\n%,d원\n\n"),
     DECEMBER_EVENT_BADGE("<12월 이벤트 배지>"),
     ONE_CHAMPAGNE("샴페인 1개"),
+    
     ZERO("0원"),
     SANTA("산타"),
     TREE("트리"),
     STAR("별"),
     NOTHING("없음"),
+
     D_DAY("크리스마스 디데이 할인"),
     WEEKDAY("평일 할인"),
     WEEKEND("주말 할인"),

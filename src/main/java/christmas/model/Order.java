@@ -9,13 +9,14 @@ public class Order {
     public Order(Map<String, Integer> order) {
         validateMenu(order);
         validateOrderCount(order);
+        validateMaxOrderCount(order);
         this.order = order;
     }
 
     private void validateMenu(Map<String, Integer> order) {
         for (String menuName : order.keySet()) {
-            boolean checkMenu = containMenu(menuName);
-            if (!checkMenu) {
+            boolean validMenu = containMenu(menuName);
+            if (!validMenu) {
                 throw new IllegalArgumentException(ErrorMessage.INVALID_ORDER.getMessage());
             }
         }
@@ -26,6 +27,16 @@ public class Order {
             if (order.get(menuName) < 1) {
                 throw new IllegalArgumentException(ErrorMessage.INVALID_ORDER.getMessage());
             }
+        }
+    }
+
+    private void validateMaxOrderCount(Map<String, Integer> order) {
+        int sumOrder = 0;
+        for (String menuName : order.keySet()) {
+            sumOrder += order.get(menuName);
+        }
+        if (sumOrder > 20) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_ORDER.getMessage());
         }
     }
 

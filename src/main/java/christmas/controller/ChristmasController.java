@@ -10,6 +10,7 @@ public class ChristmasController {
         int day = InputView.readDate();
         Map<String, Integer> order = InputView.readOrder();
         OutputView.printOrderMenu(day, order);
+
         int totalOrderAmount = Calculation.calculateTotalOrderAmount(order);
         int dDayDiscount = Calculation.calculateDDayDiscount(day);
         int weekdayDiscount = Calculation.calculateWeekdayDiscount(order, day);
@@ -17,22 +18,20 @@ public class ChristmasController {
         int specialDiscount = Calculation.calculateSpecialDiscount(day);
         int giveawayEvent = Calculation.calculateGiveawayEvent(totalOrderAmount);
         int totalBenefits = dDayDiscount + weekdayDiscount + weekendDiscount + specialDiscount + giveawayEvent;
-        showBenefits(dDayDiscount, weekdayDiscount, weekendDiscount, specialDiscount, giveawayEvent, totalOrderAmount,
-                totalBenefits);
-        showFinalResult(totalOrderAmount, giveawayEvent, totalBenefits);
+
+        showResults(totalOrderAmount, giveawayEvent, totalBenefits, dDayDiscount, weekdayDiscount, weekendDiscount,
+                specialDiscount);
     }
 
-    private void showBenefits(int dDayDiscount, int weekdayDiscount, int weekendDiscount,
-                              int specialDiscount, int giveawayEvent, int totalOrderAmount, int totalBenefits) {
+    private void showResults(int totalOrderAmount, int giveawayEvent, int totalBenefits,
+                             int dDayDiscount, int weekdayDiscount, int weekendDiscount, int specialDiscount) {
         OutputView.printTotalOrderAmount(totalOrderAmount);
         OutputView.printGiveaway(totalOrderAmount);
 
         OutputView.printBenefitDetails(dDayDiscount, weekdayDiscount, weekendDiscount,
                 specialDiscount, giveawayEvent);
         OutputView.printTotalBenefits(totalBenefits);
-    }
 
-    private void showFinalResult(int totalOrderAmount, int giveawayEvent, int totalBenefits) {
         int expectedPaymentAmount = totalOrderAmount - totalBenefits + giveawayEvent;
         OutputView.printExpectedPaymentAmount(expectedPaymentAmount);
         OutputView.printDecemberEventBadge(totalBenefits);

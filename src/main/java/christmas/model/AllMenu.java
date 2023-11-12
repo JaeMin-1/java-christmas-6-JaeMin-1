@@ -53,6 +53,4 @@ public class AllMenu {
     public Map<String, Map<String, Integer>> getAllMenu() {
         return allMenu;
     }
-
-
 }
