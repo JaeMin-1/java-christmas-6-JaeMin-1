@@ -1,12 +1,17 @@
 package christmas.controller;
 
 import christmas.model.AllMenu;
+import christmas.util.Calculation;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.util.Map;
 
 public class ChristmasController {
-    private AllMenu allMenu = new AllMenu();
+    private int dDayDiscount;
+    private int weekdayDiscount;
+    private int weekendDiscount;
+    private int specialDiscount;
+    private int giveawayEvent;
 
     public void startOrder() {
         int day = InputView.readDate();
@@ -16,35 +21,7 @@ public class ChristmasController {
         int totalOrderAmount = calculateTotalOrderAmount(order);
         OutputView.printTotalOrderAmount(totalOrderAmount);
         OutputView.printGiveaway(totalOrderAmount);
-
-        int dDayDiscount = 0;
-        int weekdayDiscount = 0;
-        int weekendDiscount = 0;
-        int specialDiscount = 0;
-        int giveawayEvent = 0;
-        if (day <= 25) {
-            dDayDiscount = 1000 + 100 * (day - 1);
-        }
-        if (day % 7 != 1 && day % 7 != 2) {
-            for (String menuName : order.keySet()) {
-                if (allMenu.getAllMenu().get("디저트").containsKey(menuName)) {
-                    weekdayDiscount += 2023 * order.get(menuName);
-                }
-            }
-        }
-        if (day % 7 == 1 || day % 7 == 2) {
-            for (String menuName : order.keySet()) {
-                if (allMenu.getAllMenu().get("메인").containsKey(menuName)) {
-                    weekendDiscount += 2023 * order.get(menuName);
-                }
-            }
-        }
-        if (day % 7 == 3 || day == 25) {
-            specialDiscount += 1000;
-        }
-        if (totalOrderAmount >= 120000) {
-            giveawayEvent += 25000;
-        }
+        calculateBenefits(day, order, totalOrderAmount);
 
         OutputView.printBenefitDetails(dDayDiscount, weekdayDiscount, weekendDiscount,
                 specialDiscount, giveawayEvent);
@@ -53,10 +30,10 @@ public class ChristmasController {
         int expectedPaymentAmount = totalOrderAmount - totalBenefits + giveawayEvent;
         OutputView.printExpectedPaymentAmount(expectedPaymentAmount);
         OutputView.printDecemberEventBadge(totalBenefits);
-
     }
 
     private int calculateTotalOrderAmount(Map<String, Integer> order) {
+        AllMenu allMenu = new AllMenu();
         int totalOrderAmount = 0;
         for (Map.Entry<String, Map<String, Integer>> category : allMenu.getAllMenu().entrySet()) {
             totalOrderAmount += calculateCategoryTotal(category.getValue(), order);
@@ -72,5 +49,13 @@ public class ChristmasController {
             }
         }
         return categoryTotal;
+    }
+
+    private void calculateBenefits(int day, Map<String, Integer> order, int totalOrderAmount) {
+        dDayDiscount = Calculation.calculateDDayDiscount(day);
+        weekdayDiscount = Calculation.calculateWeekdayDiscount(order, day);
+        weekendDiscount = Calculation.calculateWeekendDiscount(order, day);
+        specialDiscount = Calculation.calculateSpecialDiscount(day);
+        giveawayEvent = Calculation.calculateGiveawayEvent(totalOrderAmount);
     }
 }
