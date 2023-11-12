@@ -16,7 +16,7 @@ public class Order {
         for (String menuName : order.keySet()) {
             boolean checkMenu = containMenu(menuName);
             if (!checkMenu) {
-                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                throw new IllegalArgumentException(ErrorMessage.INVALID_ORDER.getMessage());
             }
         }
     }
