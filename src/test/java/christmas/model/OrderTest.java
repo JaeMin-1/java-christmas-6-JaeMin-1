@@ -1,5 +1,6 @@
 package christmas.model;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import christmas.constants.ErrorMessage;
@@ -9,6 +10,17 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class OrderTest {
+    @DisplayName("성공하는 케이스")
+    @Test
+    void validOrder() {
+        Map<String, Integer> order = new HashMap<>();
+        order.put("레드와인", 1);
+        order.put("티본스테이크", 2);
+
+        assertThatCode(() -> new Order(order))
+                .doesNotThrowAnyException();
+    }
+
     @DisplayName("메뉴판에 없을 경우 예외 처리")
     @Test
     void notInMenu() {
