@@ -7,7 +7,7 @@ public enum OutputMessage {
     BENEFIT_DETAILS("<혜택 내역>"),
     TOTAL_BENEFITS("<총혜택 금액>"),
     EXPECTED_PAYMENT_AMOUNT("<할인 후 예상 결제 금액>\n%,d원\n\n"),
-    DECEMBER_EVENT_BADGE("<12월 이벤트 배지>\n%s"),
+    DECEMBER_EVENT_BADGE("<12월 이벤트 배지>"),
     ONE_CHAMPAGNE("샴페인 1개"),
     ZERO("0원"),
     SANTA("산타"),

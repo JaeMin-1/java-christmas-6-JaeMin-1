@@ -44,9 +44,10 @@ public class Calculation {
     private static int calculateDiscountForMenuCategory(Map<String, Integer> order, String categoryName,
                                                         int discountRate) {
         AllMenu allMenu = new AllMenu();
+        Map<String, Map<String, Integer>> allMenuMap = allMenu.getAllMenu();
         int discount = 0;
         for (String menuName : order.keySet()) {
-            if (allMenu.getAllMenu().get(categoryName).containsKey(menuName)) {
+            if (allMenuMap.get(categoryName).containsKey(menuName)) {
                 discount += discountRate * order.get(menuName);
             }
         }
