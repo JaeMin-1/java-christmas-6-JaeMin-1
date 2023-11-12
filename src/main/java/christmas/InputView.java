@@ -31,23 +31,27 @@ public class InputView {
     }
 
     private static int validateAllDate(String input) {
-        int day = InputValidation.validateNumber(input);
+        int day = InputValidation.validateDate(input);
         Date date = new Date(day);
         return date.getDate();
     }
 
     private static Map<String, Integer> validateAllOrder(String[] input) {
         Map<String, Integer> tempOrder = new HashMap<>();
+        processInput(input, tempOrder);
+        validateDuplication(input, tempOrder);
+        Order order = new Order(tempOrder);
+        return order.getOrder();
+    }
+
+    private static void processInput(String[] input, Map<String, Integer> tempOrder) {
         for (String part : input) {
             String[] pair = part.split("-");
             String tempName = pair[0];
             String tempNum = pair[1];
-            int count = InputValidation.validateNumber(tempNum);
+            int count = InputValidation.validateCount(tempNum);
             tempOrder.put(tempName, count);
         }
-        validateDuplication(input, tempOrder);
-        Order order = new Order(tempOrder);
-        return order.getOrder();
     }
 
     private static void validateDuplication(String[] input, Map<String, Integer> tempOrder) {
