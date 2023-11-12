@@ -34,6 +34,9 @@ public class Application {
         if (totalOrderAmount >= 120000) {
             System.out.println("삼페인 1개");
         }
+        if (totalOrderAmount < 10000) {
+            System.out.println("없음");
+        }
         System.out.println();
 
         int dDayDiscount = 0;
@@ -66,6 +69,10 @@ public class Application {
         }
 
         System.out.println("<혜택 내역>");
+        if (dDayDiscount == 0 && weekdayDiscount == 0 && weekendDiscount == 0 && specialDiscount == 0
+                && giveawayEvent == 0) {
+            System.out.println("없음");
+        }
         if (dDayDiscount != 0) {
             System.out.println("크리스마스 디데이 할인: -" + String.format("%,d", dDayDiscount) + "원");
         }
@@ -86,7 +93,12 @@ public class Application {
         int totalBenefits = 0;
         totalBenefits = dDayDiscount + weekdayDiscount + weekendDiscount + specialDiscount + giveawayEvent;
         System.out.println("<총혜택 금액>");
-        System.out.println("-" + String.format("%,d", totalBenefits) + "원");
+        if (totalBenefits == 0) {
+            System.out.println("0원");
+        }
+        if (totalBenefits != 0) {
+            System.out.println("-" + String.format("%,d", totalBenefits) + "원");
+        }
         System.out.println();
 
         int expectedPaymentAmount = totalOrderAmount - totalBenefits + giveawayEvent;
@@ -101,6 +113,8 @@ public class Application {
             System.out.println("트리");
         } else if (totalBenefits >= 5000) {
             System.out.println("별");
+        } else if (totalBenefits < 5000) {
+            System.out.println("없음");
         }
     }
 }
