@@ -1,4 +1,4 @@
-package christmas;
+package christmas.model;
 
 public class InputValidation {
     public static int validateDate(String input) {
