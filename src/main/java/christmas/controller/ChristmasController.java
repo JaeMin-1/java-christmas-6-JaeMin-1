@@ -18,7 +18,6 @@ public class ChristmasController {
         int specialDiscount = Calculation.calculateSpecialDiscount(day);
         int giveawayEvent = Calculation.calculateGiveawayEvent(totalOrderAmount);
         int totalBenefits = dDayDiscount + weekdayDiscount + weekendDiscount + specialDiscount + giveawayEvent;
-
         showResults(totalOrderAmount, giveawayEvent, totalBenefits, dDayDiscount, weekdayDiscount, weekendDiscount,
                 specialDiscount);
     }

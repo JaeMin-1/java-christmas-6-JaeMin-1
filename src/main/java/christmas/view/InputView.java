@@ -61,6 +61,7 @@ public class InputView {
     private static void processInputOrder(String[] input, Map<String, Integer> tempOrder) {
         for (String part : input) {
             String[] pair = part.split("-");
+            outOfMenuExampleFormat(pair);
             String tempName = pair[0];
             String tempNum = pair[1];
             int count = InputValidation.validateCount(tempNum);
@@ -70,6 +71,12 @@ public class InputView {
 
     private static void validateDuplication(String[] input, Map<String, Integer> tempOrder) {
         if (input.length != tempOrder.size()) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_ORDER.getMessage());
+        }
+    }
+
+    private static void outOfMenuExampleFormat(String[] pair) {
+        if (pair.length != 2) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_ORDER.getMessage());
         }
     }
