@@ -11,6 +11,7 @@ import java.util.Map;
 
 public class InputView {
     public static int readDate() {
+        System.out.println(InputMessage.START_HEADER.getMessage());
         while (true) {
             try {
                 String input = inputDate();
